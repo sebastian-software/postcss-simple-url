@@ -24,6 +24,9 @@
     "postcss-smart-import": "^0.4.1"
   },
   "scripts": {
+    "release": "release-it --github.release --npm.publish --non-interactive",
+    "release:minor": "release-it --github.release --npm.publish --non-interactive --increment minor",
+    "release:major": "release-it --github.release --npm.publish --non-interactive --increment major",
     "test": "ava"
   }
 }
