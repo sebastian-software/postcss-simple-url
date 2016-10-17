@@ -23,13 +23,12 @@ module.exports = postcss.plugin(
         : from
 
       var cb = getDeclProcessor(result, from, to, processRebase, options)
-
       styles.walkDecls(cb)
     }
   }
 )
 
-function getDeclProcessor(result, from, to, cb, options, isCustom) {
+function getDeclProcessor(result, from, to, cb) {
   var valueCallback = function(decl, oldUrl) {
     var dirname = decl.source && decl.source.input && decl.source.input.file
       ? path.dirname(decl.source.input.file)
@@ -37,8 +36,8 @@ function getDeclProcessor(result, from, to, cb, options, isCustom) {
 
     var newUrl
 
-    if (isCustom || !isUrlShouldBeIgnored(oldUrl)) {
-      newUrl = cb(result, from, dirname, oldUrl, to, options, decl)
+    if (!isUrlShouldBeIgnored(oldUrl)) {
+      newUrl = cb(result, from, dirname, oldUrl, to)
     }
 
     return newUrl || oldUrl
