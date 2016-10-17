@@ -1,4 +1,4 @@
-var test = require("tape")
+var test = require("ava")
 
 var fs = require("fs")
 
@@ -6,7 +6,7 @@ var url = require("..")
 var postcss = require("postcss")
 
 function read(name) {
-  return fs.readFileSync("test/" + name + ".css", "utf8").trim()
+  return fs.readFileSync(name + ".css", "utf8").trim()
 }
 
 function compareFixtures(t, name, msg, opts, postcssOpts, plugin) {
@@ -20,9 +20,9 @@ function compareFixtures(t, name, msg, opts, postcssOpts, plugin) {
   var expected = read("fixtures/" + name + ".expected")
 
   // handy thing: checkout actual in the *.actual.css file
-  fs.writeFile("test/fixtures/" + name + ".actual.css", actual)
+  fs.writeFile("fixtures/" + name + ".actual.css", actual)
 
-  t.equal(actual, expected, msg)
+  t.is(actual, expected, msg)
 }
 
 test("rebase", function(t) {
@@ -36,7 +36,7 @@ test("rebase", function(t) {
     "rebase-to-from",
     "should rebase url to dirname(from)",
     opts,
-    { from: "test/fixtures/here" }
+    { from: "fixtures/here" }
   )
   compareFixtures(
     t,
@@ -50,38 +50,36 @@ test("rebase", function(t) {
     "rebase-to-to",
     "should rebase url to dirname(to) even if from given",
     opts,
-    { from: "test/fixtures/here", to: "there" }
+    { from: "fixtures/here", to: "there" }
   )
   compareFixtures(
     t,
     "rebase-all-url-syntax",
-    "should rebase url even if there is differentes types of quotes",
+    "should rebase url even if there is different types of quotes",
     opts,
-    { from: "test/fixtures/here", to: "there" }
+    { from: "fixtures/here", to: "there" }
   )
   compareFixtures(
     t,
     "rebase-querystring-hash",
     "should rebase url that have query string or hash (or both)",
     opts,
-    { from: "test/fixtures/here", to: "there" }
+    { from: "fixtures/here", to: "there" }
   )
   compareFixtures(
     t,
     "rebase-imported",
     "should rebase url of imported files",
     opts,
-    { from: "test/fixtures/transform.css" }, require("postcss-import")
+    { from: "fixtures/transform.css" }, require("postcss-import")
   )
   compareFixtures(
     t,
     "alpha-image-loader",
     "should rebase in filter",
     opts,
-    { from: "test/fixtures/here", to: "there" }
+    { from: "fixtures/here", to: "there" }
   )
-
-  t.end()
 })
 
 test("ignore absolute urls, data uris, or hashes", function(t) {
@@ -89,6 +87,4 @@ test("ignore absolute urls, data uris, or hashes", function(t) {
     t,
     "absolute-urls",
     "shouldn't not transform absolute urls, hashes or data uris")
-
-  t.end()
 })

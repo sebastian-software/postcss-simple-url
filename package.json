@@ -17,7 +17,6 @@
   ],
   "dependencies": {
     "directory-encoder": "^0.7.2",
-    "js-base64": "^2.1.5",
     "mime": "^1.2.11",
     "minimatch": "^3.0.0",
     "mkdirp": "^0.5.0",
@@ -25,11 +24,11 @@
     "postcss": "^5.0.0"
   },
   "devDependencies": {
+    "ava": "^0.16.0",
     "eslint": "^1.10.3",
-    "postcss-import": "^7.0.0",
-    "tape": "^4.0.3"
+    "postcss-import": "^7.0.0"
   },
   "scripts": {
-    "test": "npm run lint && npm run tests"
+    "test": "ava"
   }
 }
