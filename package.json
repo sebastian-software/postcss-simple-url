@@ -21,7 +21,7 @@
   "devDependencies": {
     "ava": "^0.16.0",
     "eslint": "^3.8.0",
-    "postcss-smart-import": "^0.4.0"
+    "postcss-smart-import": "^0.4.1"
   },
   "scripts": {
     "test": "ava"

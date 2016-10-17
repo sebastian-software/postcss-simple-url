@@ -16,13 +16,14 @@ function compareFixtures(t, name, msg, opts, postcssOpts, plugin) {
     pcss.use(plugin())
   }
   pcss.use(url(opts))
-  var actual = pcss.process(read("fixtures/" + name), postcssOpts).css
-  var expected = read("fixtures/" + name + ".expected")
+  return pcss.process(read("fixtures/" + name), postcssOpts).then(function(actual) {
+    var expected = read("fixtures/" + name + ".expected")
 
-  // handy thing: checkout actual in the *.actual.css file
-  fs.writeFile("fixtures/" + name + ".actual.css", actual)
+    // handy thing: checkout actual in the *.actual.css file
+    fs.writeFile("fixtures/" + name + ".actual.css", actual)
 
-  t.is(actual, expected, msg)
+    t.is(actual, expected, msg)
+  })
 }
 
 test("rebase", function(t) {
@@ -71,7 +72,7 @@ test("rebase", function(t) {
     "rebase-imported",
     "should rebase url of imported files",
     opts,
-    { from: "fixtures/transform.css" }, require("postcss-import")
+    { from: "fixtures/transform.css" }, require("postcss-smart-import")
   )
   compareFixtures(
     t,
