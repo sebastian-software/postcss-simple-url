@@ -1,20 +1,17 @@
 {
   "name": "postcss-url",
   "version": "5.1.2",
-  "description": "PostCSS plugin to rebase or inline on url().",
+  "description": "PostCSS plugin to rebase urls from imports to make them work nicely with Webpack.",
   "keywords": [
     "css",
     "postcss",
     "postcss-plugin",
     "url",
-    "rebase",
-    "inline",
-    "base64",
-    "assets"
+    "rebase"
   ],
-  "author": "Maxime Thirouin",
+  "author": "Sebastian Werner",
   "license": "MIT",
-  "repository": "https://github.com/postcss/postcss-url.git",
+  "repository": "https://github.com/sebastian-software/postcss-url.git",
   "files": [
     "index.js"
   ],
