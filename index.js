@@ -80,5 +80,10 @@ function processRebase(result, from, dirname, oldUrl, to) {
   if (path.sep === "\\") {
     newPath = newPath.replace(/\\/g, "\/")
   }
+  // New-URLs needs to be relative formatted to allow differentiation between
+  // local imports and imports from node_modules.
+  if ((oldUrl.charAt(0) === "." || oldUrl.charAt(0) === "/") && newPath.charAt(0) !== "." && newPath.charAt(0) !== "/") {
+    newPath = "./" + newPath
+  }
   return newPath
 }
