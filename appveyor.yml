@@ -3,7 +3,17 @@
 environment:
   matrix:
     - nodejs_version: 4
+      platform: x64
+    - nodejs_version: 4
+      platform: x86
+    - nodejs_version: 5
+      platform: x64
+    - nodejs_version: 5
+      platform: x86
     - nodejs_version: 6
+      platform: x64
+    - nodejs_version: 6
+      platform: x86
 
 version: "{build}"
 build: off
@@ -12,7 +22,9 @@ matrix:
   fast_finish: true
 
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version $env:platform
+  - npm -g install npm@latest
+  - npm prune
   - npm install
 
 test_script:
