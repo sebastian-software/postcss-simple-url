@@ -44,15 +44,20 @@ var output = postcss()
 Checkout [tests](test) for examples.
 
 
+
 ## Contributing
 
-Work on a branch, install dev-dependencies, respect coding style & run tests before submitting a bug fix or a feature.
+* ⇄ Pull requests and ★ Stars are always welcome.
+* For bugs and feature requests, please create an issue.
+* Pull requests must be accompanied by passing automated tests (`$ npm test`).
 
-```console
-$ git clone https://github.com/postcss/postcss-simple-url.git
-$ git checkout -b patch-1
-$ npm install
-$ npm test
-```
+## [License](license)
 
-## [License](LICENSE)
+
+
+## Copyright
+
+<img src="https://raw.githubusercontent.com/sebastian-software/s15e-javascript/master/assets/sebastiansoftware.png" alt="Sebastian Software GmbH Logo" width="250" height="200"/>
+
+Copyright 2016<br/>[Sebastian Software GmbH](http://www.sebastian-software.de)
+
