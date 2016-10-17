@@ -27,7 +27,6 @@
   "devDependencies": {
     "eslint": "^1.10.3",
     "eslint-config-i-am-meticulous": "^2.0.0",
-    "npmpub": "^3.0.1",
     "postcss-import": "^7.0.0",
     "tape": "^4.0.3"
   },
@@ -35,7 +34,6 @@
     "lint": "eslint --fix .",
     "tests": "tape test",
     "test": "npm run lint && npm run tests",
-    "release": "npmpub"
   },
   "eslintConfig": {
     "extends": "eslint-config-i-am-meticulous/es5"
