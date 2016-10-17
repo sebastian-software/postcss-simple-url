@@ -1,6 +1,6 @@
 {
   "name": "postcss-simple-url",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "PostCSS plugin to rebase urls from imports to make them work nicely with Webpack v2.",
   "keywords": [
     "css",
