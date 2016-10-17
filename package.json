@@ -30,8 +30,6 @@
     "tape": "^4.0.3"
   },
   "scripts": {
-    "test": "npm run lint && npm run tests",
-  },
     "test": "npm run lint && npm run tests"
   }
 }
