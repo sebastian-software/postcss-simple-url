@@ -1,15 +1,17 @@
 language: node_js
-
 node_js:
-  - 4
-  - 5
   - 6
+  - 7
 
 matrix:
   fast_finish: true
 
-before_install:
-  - npm -g install npm@latest
-  - node --version
-  - npm --version
+cache:
+  yarn: true
+  directories:
+  - node_modules
 
+notifications:
+  slack:
+    rooms:
+      secure: THIVh6hUNmC6t8TC0+W8P7o7mFKW+gGxpB5c53+YZ34b/2UtAXry9uD7x6iOYH+zlzW6iq17nB0HOBamNk3okejf7ClCBcFE9Z9SimdocATOT+SFqPX/Nu5q/LEF86smQyl70PyZxCw+zPrYJNFG/hFoOo8CYPofYmyi/E7nP/GwJuuEbho/zLOI4h05+QtCqcOgB7wkMrK+m1XGfWekTIO+Om03+iFgIuf9QwNUtKcdnTzEGSzCvzoFEShOsjR2ux1edkLOH0i3PTmNKlLtfK3ijW9GxSgOKXmk4CI7k5Q5PsAfq0M054gR7PPic7HmtFOyau9aZgfkOv5eR5rxC/kXkcSxrGbt949WhAcjC+OiyLlucAx99vQE1Jcwa4gAnyy5ceLYUVtn+A/vv7ktPw0OEX51GKmEY7ZDaXO9S/UcvbGpo3ldBzlycc3RcjI8F1oSlQy4q/gsxKiNh99Bzbv71xOsTOsq4+0f+9oYJoDumgfEmIWXTHR6FeJrcFjyIV9zo9IbCec41J957frXLGltpaz/F6rUja3MH0XtJHoqk1kNGJzoZJGcX35tj//4Hce+e+yBMuxfNzjY7izFgBH2wHCeAGwhQ1QqY4BXL9RoqmyqXd8QZtHuglwJ+oY3y6PA2h+AxLU99qB3hAPZ/6co/EC+NkC5RtrenDsHPZs=
