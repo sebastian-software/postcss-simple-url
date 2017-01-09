@@ -16,11 +16,11 @@ function compareFixtures(t, name, msg, opts, postcssOpts, plugin) {
     pcss.use(plugin())
   }
   pcss.use(url(opts))
-  return pcss.process(read("fixtures/" + name), postcssOpts).then(function(actual) {
-    var expected = read("fixtures/" + name + ".expected")
+  return pcss.process(read("test/fixtures/" + name), postcssOpts).then(function(actual) {
+    var expected = read("test/fixtures/" + name + ".expected")
 
     // handy thing: checkout actual in the *.actual.css file
-    fs.writeFile("fixtures/" + name + ".actual.css", actual)
+    fs.writeFileSync("test/fixtures/" + name + ".actual.css", actual)
 
     t.is(actual, expected, msg)
   })
@@ -37,7 +37,7 @@ test("rebase", function(t) {
     "rebase-to-from",
     "should rebase url to dirname(from)",
     opts,
-    { from: "fixtures/here" }
+    { from: "test/fixtures/here" }
   )
   compareFixtures(
     t,
@@ -51,35 +51,35 @@ test("rebase", function(t) {
     "rebase-to-to",
     "should rebase url to dirname(to) even if from given",
     opts,
-    { from: "fixtures/here", to: "there" }
+    { from: "test/fixtures/here", to: "there" }
   )
   compareFixtures(
     t,
     "rebase-all-url-syntax",
     "should rebase url even if there is different types of quotes",
     opts,
-    { from: "fixtures/here", to: "there" }
+    { from: "test/fixtures/here", to: "there" }
   )
   compareFixtures(
     t,
     "rebase-querystring-hash",
     "should rebase url that have query string or hash (or both)",
     opts,
-    { from: "fixtures/here", to: "there" }
+    { from: "test/fixtures/here", to: "there" }
   )
   compareFixtures(
     t,
     "rebase-imported",
     "should rebase url of imported files",
     opts,
-    { from: "fixtures/transform.css" }, require("postcss-smart-import")
+    { from: "test/fixtures/transform.css" }, require("postcss-smart-import")
   )
   compareFixtures(
     t,
     "alpha-image-loader",
     "should rebase in filter",
     opts,
-    { from: "fixtures/here", to: "there" }
+    { from: "test/fixtures/here", to: "there" }
   )
 })
 
