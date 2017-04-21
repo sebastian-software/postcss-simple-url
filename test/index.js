@@ -9,7 +9,7 @@ function read(name) {
   return fs.readFileSync(name + ".css", "utf8").trim()
 }
 
-function compareFixtures(t, name, msg, opts, postcssOpts, plugin) {
+function compareFixtures(check, name, msg, opts, postcssOpts, plugin) {
   opts = opts || {}
   var pcss = postcss()
   if (plugin) {
@@ -22,60 +22,60 @@ function compareFixtures(t, name, msg, opts, postcssOpts, plugin) {
     // handy thing: checkout actual in the *.actual.css file
     fs.writeFileSync("test/fixtures/" + name + ".actual.css", actual)
 
-    t.is(actual, expected, msg)
+    check.is(actual.css, expected, msg)
   })
 }
 
-test("rebase", function(t) {
+test("rebase", async function(check) {
   var opts = {}
-  compareFixtures(
-    t,
+  await compareFixtures(
+    check,
     "cant-rebase",
     "shouldn't rebase url if not info available")
-  compareFixtures(
-    t,
+  await compareFixtures(
+    check,
     "rebase-to-from",
     "should rebase url to dirname(from)",
     opts,
     { from: "test/fixtures/here" }
   )
-  compareFixtures(
-    t,
+  await compareFixtures(
+    check,
     "rebase-to-to-without-from",
     "should rebase url to dirname(to)",
     opts,
     { to: "there" }
   )
-  compareFixtures(
-    t,
+  await compareFixtures(
+    check,
     "rebase-to-to",
     "should rebase url to dirname(to) even if from given",
     opts,
     { from: "test/fixtures/here", to: "there" }
   )
-  compareFixtures(
-    t,
+  await compareFixtures(
+    check,
     "rebase-all-url-syntax",
     "should rebase url even if there is different types of quotes",
     opts,
     { from: "test/fixtures/here", to: "there" }
   )
-  compareFixtures(
-    t,
+  await compareFixtures(
+    check,
     "rebase-querystring-hash",
     "should rebase url that have query string or hash (or both)",
     opts,
     { from: "test/fixtures/here", to: "there" }
   )
-  compareFixtures(
-    t,
+  await compareFixtures(
+    check,
     "rebase-imported",
     "should rebase url of imported files",
     opts,
     { from: "test/fixtures/transform.css" }, require("postcss-smart-import")
   )
-  compareFixtures(
-    t,
+  await compareFixtures(
+    check,
     "alpha-image-loader",
     "should rebase in filter",
     opts,
@@ -83,9 +83,9 @@ test("rebase", function(t) {
   )
 })
 
-test("ignore absolute urls, data uris, or hashes", function(t) {
-  compareFixtures(
-    t,
+test("ignore absolute urls, data uris, or hashes", async function(check) {
+  await compareFixtures(
+    check,
     "absolute-urls",
     "shouldn't not transform absolute urls, hashes or data uris")
 })
