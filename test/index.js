@@ -1,9 +1,8 @@
 var test = require("ava")
-
 var fs = require("fs")
+var postcss = require("postcss")
 
 var url = require("..")
-var postcss = require("postcss")
 
 function read(name) {
   return fs.readFileSync(name + ".css", "utf8").trim()
@@ -26,59 +25,79 @@ function compareFixtures(check, name, msg, opts, postcssOpts, plugin) {
   })
 }
 
-test("rebase", async function(check) {
-  var opts = {}
+test("cant-rebase", async function(check) {
   await compareFixtures(
     check,
     "cant-rebase",
     "shouldn't rebase url if not info available")
+})
+
+test("rebase-to-from", async function(check) {
   await compareFixtures(
     check,
     "rebase-to-from",
     "should rebase url to dirname(from)",
-    opts,
+    null,
     { from: "test/fixtures/here" }
   )
+})
+
+test("rebase-to-to-without-from", async function(check) {
   await compareFixtures(
     check,
     "rebase-to-to-without-from",
     "should rebase url to dirname(to)",
-    opts,
+    null,
     { to: "there" }
   )
+})
+
+test("rebase-to-to", async function(check) {
   await compareFixtures(
     check,
     "rebase-to-to",
     "should rebase url to dirname(to) even if from given",
-    opts,
+    null,
     { from: "test/fixtures/here", to: "there" }
   )
+})
+
+test("rebase-all-url-syntax", async function(check) {
   await compareFixtures(
     check,
     "rebase-all-url-syntax",
     "should rebase url even if there is different types of quotes",
-    opts,
+    null,
     { from: "test/fixtures/here", to: "there" }
   )
+})
+
+test("rebase-querystring-hash", async function(check) {
   await compareFixtures(
     check,
     "rebase-querystring-hash",
     "should rebase url that have query string or hash (or both)",
-    opts,
+    null,
     { from: "test/fixtures/here", to: "there" }
   )
+})
+
+test("rebase-imported", async function(check) {
   await compareFixtures(
     check,
     "rebase-imported",
     "should rebase url of imported files",
-    opts,
+    null,
     { from: "test/fixtures/transform.css" }, require("postcss-smart-import")
   )
+})
+
+test("alpha-image-loader", async function(check) {
   await compareFixtures(
     check,
     "alpha-image-loader",
     "should rebase in filter",
-    opts,
+    null,
     { from: "test/fixtures/here", to: "there" }
   )
 })
