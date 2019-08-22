@@ -5,6 +5,8 @@
 
 # PostCSS Simple URL <br/>[![Project unmaintained][unmaintained-image]][unmaintained-url] ![Downloads][npm-version-img] ![Downloads][npm-downloads-img] [![Build Status Unix][travis-img]][travis] [![Build Status Windows][appveyor-img]][appveyor] ![Dependencies][deps-img]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/sebastian-software/postcss-simple-url.svg)](https://greenkeeper.io/)
+
 [PostCSS] plugin for loading/including other files (transform `@import` rules by inlining content) and quering/referring assets (referred in `url()` functions).
 
 [PostCSS]: https://github.com/postcss/postcss
